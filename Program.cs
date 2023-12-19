@@ -55,8 +55,12 @@ namespace Practice_Linq
             Console.WriteLine("\n======================== QUERY 1 ========================");
 
             // див. приклад як має бути виведено:
+           var query1 = games.Where(el=> el.Country == "Ukraine" && el.Date.Year == 2012);
 
-
+            foreach(var game in query1)
+            {
+                Console.WriteLine($"{game.Date.ToShortDateString()} {game.Home_team} - {game.Away_team}, Score: {game.Home_score} - {game.Away_score}, Country: {game.Country}");
+            }
         }
 
         // Запит 2
