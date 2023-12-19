@@ -48,7 +48,7 @@ namespace Practice_Linq
         {
             //Query 1: Вивести всі матчі, які відбулися в Україні у 2012 році.
 
-            var selectedGames = games.Where(el => el.Country == "Ukraine" && el.Date.Year == 2012); ; // Корегуємо запит !!!
+            var selectedGames = games.Where(el => el.Country == "Ukraine" && el.Date.Year == 2012);  // Корегуємо запит !!!
 
 
             // Перевірка
@@ -67,7 +67,7 @@ namespace Practice_Linq
         {
             //Query 2: Вивести Friendly матчі збірної Італії, які вона провела з 2020 року.  
 
-            var selectedGames = games.Where(el => el.Date.Year >= 2020  && el.Tournament == "Friendly" && (el.Away_team == "Italy" || el.Home_team == "Italy")); ; // Корегуємо запит !!!
+            var selectedGames = games.Where(el => el.Date.Year >= 2020  && el.Tournament == "Friendly" && (el.Away_team == "Italy" || el.Home_team == "Italy"));  // Корегуємо запит !!!
 
 
             // Перевірка
@@ -87,7 +87,7 @@ namespace Practice_Linq
         {
             //Query 3: Вивести всі домашні матчі збірної Франції за 2021 рік, де вона зіграла у нічию.
 
-            var selectedGames = games;   // Корегуємо запит !!!
+            var selectedGames = games.Where(el => el.Date.Year == 2021 && el.Home_team == "France" && el.Away_score-el.Home_score == 0); ;   // Корегуємо запит !!!
 
             // Перевірка
             Console.WriteLine("\n======================== QUERY 3 ========================");
@@ -95,6 +95,10 @@ namespace Practice_Linq
             // див. приклад як має бути виведено:
 
 
+            foreach (var game in selectedGames)
+            {
+                Console.WriteLine($"{game.Date.ToShortDateString()} {game.Home_team} - {game.Away_team}, Score: {game.Home_score} - {game.Away_score}, Country: {game.Country}");
+            }
         }
 
         // Запит 4
