@@ -88,7 +88,7 @@ namespace Practice_Linq
         {
             //Query 3: Вивести всі домашні матчі збірної Франції за 2021 рік, де вона зіграла у нічию.
 
-            var selectedGames = games.Where(el => el.Date.Year == 2021 && el.Home_team == "France" && el.Away_score-el.Home_score == 0);    // Корегуємо запит !!!
+            var selectedGames = games.Where(el => el.Date.Year == 2021 && el.Home_team == "France" && el.Away_score-el.Home_score == 0 &&  el.Country == "France");    // Корегуємо запит !!!
 
             // Перевірка
             Console.WriteLine("\n======================== QUERY 3 ========================");
@@ -227,13 +227,17 @@ namespace Practice_Linq
         {
             //Query 10: Вивести з 5-го по 10-тий (включно) матчі Gold Cup, які відбулися у липні 2023 р.
 
-            var selectedGames = games;    // Корегуємо запит !!!
+            var selectedGames = games.Where(el => el.Date.Year == 2023 && el.Date.Month == 7 && el.Tournament == "Gold Cup").Skip(4).Take(6);    // Корегуємо запит !!!
 
             // Перевірка
             Console.WriteLine("\n======================== QUERY 10 ========================");
 
             // див. приклад як має бути виведено:
 
+            foreach (var game in selectedGames)
+            {
+                Console.WriteLine($"{game.Date.ToShortDateString()} {game.Home_team} - {game.Away_team}, Score: {game.Home_score} - {game.Away_score}, Country: {game.Country}");
+            }
 
         }
 
