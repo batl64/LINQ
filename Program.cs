@@ -188,7 +188,7 @@ namespace Practice_Linq
             //Query 8: Перетворити всі матчі Євро-2012 (UEFA Euro), які відбулися в Україні, на матчі з наступними властивостями:
             // MatchYear - рік матчу, Team1 - назва приймаючої команди, Team2 - назва гостьової команди, Goals - сума всіх голів за матч
 
-            var selectedGames = games.Where(el => el.Date.Year == 2012 && el.Tournament== "UEFA Euro" && el.Country == "Ukraine");   // Корегуємо запит !!!
+            var selectedGames = games.Where(el => el.Date.Year == 2012 && el.Tournament== "UEFA Euro" && el.Country == "Ukraine").Select(x => new { Year =x.Date.Year, Home_team =x.Home_team, Away_team = x.Away_team, Away_score=x.Away_team, Home_score=x.Home_score }).ToList();   // Корегуємо запит !!!
 
             // Перевірка
             Console.WriteLine("\n======================== QUERY 8 ========================");
@@ -197,7 +197,7 @@ namespace Practice_Linq
 
             foreach (var game in selectedGames)
             {
-                Console.WriteLine($"{game.Date.Year} {game.Home_team} - {game.Away_team}, Goals: {game.Away_score + game.Home_score}");
+                Console.WriteLine($"{game.Year} {game.Home_team} - {game.Away_team}, Goals: {game.Away_score + game.Home_score}");
             }
         }
 
@@ -208,7 +208,7 @@ namespace Practice_Linq
             //Query 9: Перетворити всі матчі UEFA Nations League у 2023 році на матчі з наступними властивостями:
             // MatchYear - рік матчу, Game - назви обох команд через дефіс (першою - Home_team), Result - результат для першої команди (Win, Loss, Draw)
 
-            var selectedGames = games.Where(el => el.Date.Year == 2023 && el.Tournament == "UEFA Nations League");   // Корегуємо запит !!!
+            var selectedGames = games.Where(el => el.Date.Year == 2023 && el.Tournament == "UEFA Nations League").Select(x => new { Year = x.Date.Year, Home_team = x.Home_team, Away_team = x.Away_team, Away_score = x.Away_team, res = x.Away_score > x.Home_score ? "Lose" : x.Away_score == x.Home_score ? "Draw" : "Win" }).ToList(); ;   // Корегуємо запит !!!
 
             // Перевірка
             Console.WriteLine("\n======================== QUERY 9 ========================");
@@ -217,7 +217,7 @@ namespace Practice_Linq
 
             foreach (var game in selectedGames)
             {
-                Console.WriteLine($"{game.Date.Year} {game.Home_team}-{game.Away_team}, Result for team1:" + (game.Away_score > game.Home_score ? "Lose" : game.Away_score == game.Home_score ? "Draw" : "Win"));
+                Console.WriteLine($"{game.Year} {game.Home_team}-{game.Away_team}, Result for team1: {game.res}");
             }
 
         }
